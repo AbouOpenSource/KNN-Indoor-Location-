@@ -33,17 +33,18 @@ public class AppMain {
         //System.out.println(address);
 
         Vector<Cellule> vector = space.getKNeighboors(cellule,4);
-
+        System.out.println("Les 4 voisins : ");
         for (Cellule celule:vector) {
             System.out.println(celule.getAddress());
         }
-
+        /****************Without ponderation***************/
         Address address = space.getCenterWithoutPonderation(cellule,4);
         System.out.println("Center solution with:"+address);
 
         /*******************With ponderation***************************/
         System.out.println("With ponderation");
-        space.getCenterWithPonderation(cellule,4);
+        Address address1 =space.getCenterWithPonderation(cellule,4);
+       // System.out.println(address1);
     }
 
 

@@ -9,6 +9,11 @@ public class Address {
         this.y = y;
     }
 
+    public Address() {
+        this.x =0;
+        this.y = 0;
+    }
+
     public Address(String element, String element1) {
         this.x=Integer.parseInt(element);
         this.y= Integer.parseInt(element1);
@@ -54,9 +59,15 @@ public class Address {
         return this;
     }
 
-    public Address div(int div){
+    public Address div(double div){
        this.setY(this.getY()/div);
        this.setX(this.getX()/div);
+
+        return this;
+    }
+    public Address mul(double div){
+        this.setY(this.getY()*div);
+        this.setX(this.getX()*div);
 
         return this;
     }

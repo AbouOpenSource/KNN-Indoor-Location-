@@ -92,7 +92,7 @@ public class Space {
         return address.div(vector.size());
     }
 
-    public  Vector<Distance> getCenterWithPonderation(Cellule cellule, int k){
+    public  Vector<Distance> getApWithPonderation(Cellule cellule, int k){
 
         Vector<Distance> KNeighboors = new Vector<Distance>();
         Cellule tmp = new Cellule();
@@ -121,5 +121,34 @@ public class Space {
     }
 
 
+    public  Address getCenterWithPonderation(Cellule cellule, int k){
+        Address address = new Address(0,0);
+        Vector<Distance> KNeighboors = new Vector<Distance>();
+        Cellule tmp = new Cellule();
+
+        for (Map.Entry<Address, Cellule> entry : mapCellule.entrySet()) {
+            double distance_compute = this.computeDistance(entry.getValue(),cellule);
+            KNeighboors.add(new Distance(distance_compute, entry.getValue()));
+
+        }
+        Collections.sort(KNeighboors);
+        double somme =0;
+        for (int index = 0; index <k; index ++){
+            somme+= KNeighboors.elementAt(index ).distance;
+        }
+        for (int index = 0; index <k; index ++){
+            KNeighboors.elementAt(index ).coefficient=somme/KNeighboors.elementAt(index).distance;
+        }
+
+        for (int w =0 ; w<k ; w++){
+            System.out.println(KNeighboors.elementAt(w).cellule.getAddress()+" With coeff :" +KNeighboors.elementAt(w).coefficient);
+            address.add(KNeighboors.elementAt(w).cellule.getAddress().mul( KNeighboors.elementAt(w).coefficient));
+        }
+
+
+        return address.div(k*somme);
+
+
+    }
 
 }
